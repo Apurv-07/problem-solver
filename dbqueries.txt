@@ -1,0 +1,36 @@
+
+CREATE TABLE badges (
+id int PRIMARY KEY,
+name VARCHAR (50),
+required_score int
+);
+
+
+CREATE TABLE users (
+id int primary KEY, 
+name VARCHAR (50), 
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+points int DEFAULT 0, 
+passwords VARCHAR(50), 
+badgeId INT REFERENCES badges(id),
+email VARCHAR (50)
+);
+
+CREATE TABLE questions (
+    id INT PRIMARY KEY,
+    question TEXT,
+    createdBy INT REFERENCES users(id),
+    difficulty TEXT DEFAULT 'easy' CHECK (difficulty IN ('easy', 'medium', 'hard'))
+);
+
+CREATE TABLE solutions (
+id int PRIMARY KEY,
+created_by int references users(id),
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+answer text,
+parentId int references questions(id)
+);
+
+
+
+

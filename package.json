@@ -1,0 +1,27 @@
+{
+  "name": "codingplatformbe",
+  "version": "1.0.0",
+  "description": "A platform to code and share your code with others.",
+  "license": "ISC",
+  "author": "Apurv Prakash",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild /server.js --bundle --outdir=dist" 
+  },
+  "dependencies": {
+    "@azure/storage-blob": "^12.33.0",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
