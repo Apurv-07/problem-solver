@@ -11,7 +11,8 @@ const dbPath =
         : path.join(__dirname, "database.db");
 
 let conn = null;
-
+console.log("HOME =", process.env.HOME);
+console.log("DB Path =", dbPath);
 const dbrun = async () => {
     conn = await open({
         filename: dbPath,
