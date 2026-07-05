@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     origin: [
         "http://localhost:5173", // Default Vite local port
-        "https://windows.net" // Your Azure Blob URL
+        process.env.FRONTEND_URL // Your Azure Blob URL
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

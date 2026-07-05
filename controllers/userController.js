@@ -3,15 +3,21 @@ const bcrypt = require("bcrypt");
 const { open } = require('sqlite');
 const sqlite3 = require('sqlite3');
 const { BlobServiceClient, ContainerClient } = require("@azure/storage-blob");
+const path = require("path");
+
+const dbPath =
+    process.env.WEBSITE_INSTANCE_ID
+        ? path.join(process.env.HOME, "site", "data", "database.db")
+        : path.join(__dirname, "database.db");
 
 let conn = null;
+
 const dbrun = async () => {
-    conn = await open({ filename: './database.db', driver: sqlite3.Database });
+    conn = await open({
+        filename: dbPath,
+        driver: sqlite3.Database
+    });
 };
-dbrun().catch((err) => {
-    console.error("Failed to connect to the database:", err);
-    process.exit(1);
-});
 
 const bsc = new BlobServiceClient(
     `https://${process.env.ACCOUNT_NAME}.blob.core.windows.net?${process.env.SAS_TOKEN}`
