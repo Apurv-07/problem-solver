@@ -2,10 +2,7 @@ const { open } = require('sqlite');
 const sqlite3 = require("sqlite3");
 const path = require("path");
 
-const dbPath =
-    process.env.WEBSITE_INSTANCE_ID
-        ? path.join(process.env.HOME, "site", "data", "database.db")
-        : path.join(__dirname, "database.db");
+const dbPath = path.join(__dirname, "database.db");
 
 let conn = null;
 
