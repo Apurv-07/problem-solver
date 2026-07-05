@@ -13,6 +13,16 @@ console.log("HOME =", process.env.HOME);
 console.log("DB Path =", dbPath);
 
 const dbrun = async () => {
+    console.log("WEBSITE_INSTANCE_ID =", process.env.WEBSITE_INSTANCE_ID);
+    console.log("HOME =", process.env.HOME);
+    console.log("HOME_EXPANDED =", process.env.HOME_EXPANDED);
+    console.log("WEBROOT_PATH =", process.env.WEBROOT_PATH);
+    console.log("PWD =", process.cwd());
+    console.log("All WEBSITE vars:");
+    Object.keys(process.env)
+        .filter(k => k.startsWith("WEBSITE"))
+        .sort()
+        .forEach(k => console.log(`${k}=${process.env[k]}`));
     conn = await open({
         filename: dbPath,
         driver: sqlite3.Database
@@ -54,7 +64,7 @@ const getMyAnswered = async (req, res) => {
 
     try {
         const question = await conn.all(dbQuery, params); // Use the dynamic array
-        if(question)
+        if (question)
             res.status(200).json(question);
         else
             res.status(404).json("Nothing found");
@@ -87,13 +97,13 @@ const createAnswer = async (req, res) => {
         try {
             await conn.run('INSERT INTO user_badges (user_id, badge_id) VALUES (?, ?)', [userId, badge.id]);
             await conn.run('INSERT INTO activity(created_by, action_performed) VALUES (?, ?)', [userId, `Earned the ${badge.name} badge for creating an answer`]);
-        }catch (e) {
+        } catch (e) {
             console.log("Badge already exists for user:", e.message);
         }
-        res.status(201).json({message:"Answer created successfully"});
+        res.status(201).json({ message: "Answer created successfully" });
     } catch (error) {
         console.error("Error creating answer:", error);
-        res.status(500).json({message:"Error creating answer"});
+        res.status(500).json({ message: "Error creating answer" });
     }
 }
 

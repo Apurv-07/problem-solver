@@ -12,6 +12,16 @@ console.log("HOME =", process.env.HOME);
 console.log("DB Path =", dbPath);
 
 const dbrun = async () => {
+    console.log("WEBSITE_INSTANCE_ID =", process.env.WEBSITE_INSTANCE_ID);
+    console.log("HOME =", process.env.HOME);
+    console.log("HOME_EXPANDED =", process.env.HOME_EXPANDED);
+    console.log("WEBROOT_PATH =", process.env.WEBROOT_PATH);
+    console.log("PWD =", process.cwd());
+    console.log("All WEBSITE vars:");
+    Object.keys(process.env)
+        .filter(k => k.startsWith("WEBSITE"))
+        .sort()
+        .forEach(k => console.log(`${k}=${process.env[k]}`));
     conn = await open({
         filename: dbPath,
         driver: sqlite3.Database
@@ -126,7 +136,7 @@ const createQuestion = async (req, res) => {
         } catch (e) {
             console.log("Badge already exists for user:", e.message);
         }
-        return res.status(201).json({message:"Question created successfully"});
+        return res.status(201).json({ message: "Question created successfully" });
     } catch (e) {
         return res.status(500).json({ message: e.message });
     }
@@ -147,10 +157,10 @@ const getRandomQuestion = async (req, res) => {
         }
         dbQuery += ' ORDER BY RANDOM() LIMIT 1';
         const question = await conn.get(dbQuery, params);
-        if(question){
+        if (question) {
             res.status(200).json(question);
-        }else{
-            res.status(200).json({message: "No data found"})
+        } else {
+            res.status(200).json({ message: "No data found" })
         }
     } catch (e) {
         res.status(500).send("Error fetching random question");
@@ -180,10 +190,10 @@ const getRandomFromMyList = async (req, res) => {
         console.log("Data", dbQuery)
 
         const question = await conn.get(dbQuery, params); // Use the dynamic array
-        if(question){
+        if (question) {
             res.status(200).json(question);
-        }else{
-            res.status(200).json({message: "No data found"})
+        } else {
+            res.status(200).json({ message: "No data found" })
         }
     } catch (e) {
         res.status(500).json({ error: e.message });

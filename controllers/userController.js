@@ -14,6 +14,17 @@ let conn = null;
 console.log("HOME =", process.env.HOME);
 console.log("DB Path =", dbPath);
 const dbrun = async () => {
+    console.log("WEBSITE_INSTANCE_ID =", process.env.WEBSITE_INSTANCE_ID);
+    console.log("HOME =", process.env.HOME);
+    console.log("HOME_EXPANDED =", process.env.HOME_EXPANDED);
+    console.log("WEBROOT_PATH =", process.env.WEBROOT_PATH);
+    console.log("PWD =", process.cwd());
+    console.log("All WEBSITE vars:");
+    Object.keys(process.env)
+        .filter(k => k.startsWith("WEBSITE"))
+        .sort()
+        .forEach(k => console.log(`${k}=${process.env[k]}`));
+
     conn = await open({
         filename: dbPath,
         driver: sqlite3.Database
