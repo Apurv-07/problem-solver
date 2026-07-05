@@ -5,7 +5,7 @@ const sqlite3 = require('sqlite3');
 const { BlobServiceClient, ContainerClient } = require("@azure/storage-blob");
 const path = require("path");
 
-const dbPath = path.join(__dirname, "database.db");
+const dbPath = path.join(__dirname, "..", "database.db");
 
 let conn = null;
 console.log("HOME =", process.env.HOME);
