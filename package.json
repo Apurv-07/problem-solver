@@ -7,8 +7,8 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild /server.js --bundle --outdir=dist" 
+    "start": "node server.js",
+    "test": "echo \"No tests\""
   },
   "dependencies": {
     "@azure/storage-blob": "^12.33.0",
