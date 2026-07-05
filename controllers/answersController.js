@@ -15,6 +15,10 @@ const dbrun = async () => {
         driver: sqlite3.Database
     });
 };
+dbrun().catch((err) => {
+    console.error("Failed to connect to the database:", err);
+    process.exit(1);
+});
 
 
 const getAnswersByQuestionId = async (req, res) => {

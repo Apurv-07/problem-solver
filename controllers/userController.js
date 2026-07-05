@@ -18,6 +18,11 @@ const dbrun = async () => {
         driver: sqlite3.Database
     });
 };
+dbrun().catch((err) => {
+    console.error("Failed to connect to the database:", err);
+    process.exit(1);
+});
+
 
 const bsc = new BlobServiceClient(
     `https://${process.env.ACCOUNT_NAME}.blob.core.windows.net?${process.env.SAS_TOKEN}`
